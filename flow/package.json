@@ -1,0 +1,21 @@
+{
+  "name": "flow",
+  "version": "1.0.0",
+  "description": "let it flow",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test",
+    "td": "mocha debug test"
+  },
+  "keywords": [
+    "flow",
+    "experiment",
+    "reactive"
+  ],
+  "author": "josets",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
