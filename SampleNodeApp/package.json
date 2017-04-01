@@ -1,0 +1,20 @@
+{
+  "name": "sample-node-app",
+  "version": "1.0.0",
+  "description": "Sample Node App",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js"
+  },
+  "keywords": [
+    "Node.js",
+    "Sample"
+  ],
+  "author": "jteodoro",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0",
+    "express": "^4.13.4"
+  }
+}
