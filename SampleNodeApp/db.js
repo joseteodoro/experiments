@@ -1,11 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import Sequelize from 'sequelize';
 let db = null;
-module.exports = function app() {
+let sequelize;
+module.exports = function app () {
     if (!db) {
         const config = require('./libs/config');
-        const sequelize = new Sequelize(config.database, config.username, config.password, config.params);
+        const Sequelize = require('sequelize');
+        sequelize = new Sequelize(config.database, config.username, config.password, config.params);
         db = {
             sequelize,
             Sequelize,
