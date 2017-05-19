@@ -24,3 +24,8 @@ def aFunction():
 print("Finished decorating aFunction()")
 
 aFunction()
+
+def fun_fun(fun):
+    fun("my fun inside print")
+
+fun_fun(print)
