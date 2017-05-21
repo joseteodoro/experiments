@@ -1,10 +1,12 @@
 import random
 
+
 def generator():
     data = yield
     print('Inside generator with the value {}'.format(data))
     """ second yield call make get the generator exhausted """
     yield data
+
 
 if __name__ == '__main__':
     generator = generator()

@@ -23,6 +23,7 @@ def consume():
         print('The running data_items_seen is {}'.format(data_items_seen))
         print('The running average is {}'.format(running_sum / float(data_items_seen)))
 
+
 def produce(consumer):
     """Produces a set of values and forwards them to the pre-defined consumer
     function

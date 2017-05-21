@@ -1,3 +1,5 @@
+
+
 def scope_test():
     def do_local():
         spam = "local spam"
@@ -18,10 +20,6 @@ def scope_test():
     do_global()
     print("After global assignment:", spam)
 
-scope_test()
-print("In global scope:", spam)
-
-print('\n\n\n\n\n')
 
 class Dog:
     print('declaring `Dog` class')
@@ -37,9 +35,15 @@ class Dog:
         self.tricks.append(trick)
         print('Calling instance: '+self.name+' and adding the trick: '+trick+' to the class array instead of the instance')
 
-d = Dog('Fido')
-e = Dog('Buddy')
-d.add_trick('roll over')
-e.add_trick('play dead')
-print('When added on class scope, all instances will share the same tricks:')
-print(d.tricks)
+
+if __name__ == '__main__':
+    scope_test()
+    print("In global scope:", spam)
+
+    print('\n\n\n\n\nPlaying with classes and static methods')
+    d = Dog('Fido')
+    e = Dog('Buddy')
+    d.add_trick('roll over')
+    e.add_trick('play dead')
+    print('When added on class scope, all instances will share the same tricks:')
+    print(d.tricks)
