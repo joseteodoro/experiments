@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -33,18 +32,19 @@ func loggingHandler(next http.Handler) http.Handler {
 		t1 := time.Now()
 		next.ServeHTTP(w, r)
 		t2 := time.Now()
-		log.Printf("[%s] %q %v\n", r.Method, r.URL.String(), t2.Sub(t1))
+		calledURL := r.URL.String()
+		log.Printf("[%s] %q %v\n", r.Method, calledURL, t2.Sub(t1))
 	}
 
 	return http.HandlerFunc(fn)
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "You are on the about page.")
+	fmt.Fprintf(w, "{'message' : 'You are on the about page.'}")
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome!")
+	fmt.Fprintf(w, "{'message' : 'Welcome!'}")
 }
 
 type appContext struct{}
@@ -52,16 +52,14 @@ type appContext struct{}
 func (c *appContext) authHandler(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		authToken := r.Header.Get("Authorization")
-		user, err := map[string]interface{}{}, errors.New("test")
-		// user, err := getUser(c.db, authToken)
-		log.Println(authToken)
 
-		if err != nil {
+		if authToken == "" {
 			http.Error(w, http.StatusText(401), 401)
 			return
 		}
 
-		context.Set(r, "user", user)
+		fmt.Fprintf(w, "{'message' : 'You are logged as %v.'}\n", authToken)
+		context.Set(r, "authToken", authToken)
 		next.ServeHTTP(w, r)
 	}
 
@@ -69,7 +67,7 @@ func (c *appContext) authHandler(next http.Handler) http.Handler {
 }
 
 func (c *appContext) adminHandler(w http.ResponseWriter, r *http.Request) {
-	user := context.Get(r, "user")
+	user := context.Get(r, "authToken")
 	// Maybe other operations on the database
 	json.NewEncoder(w).Encode(user)
 }
@@ -81,7 +79,6 @@ func (c *appContext) teaHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(nil)
 }
 
-// We could also put *httprouter.Router in a field to not get access to the original methods (GET, POST, etc. in uppercase)
 type router struct {
 	*httprouter.Router
 }
