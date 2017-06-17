@@ -2,3 +2,4 @@ node_modules/
 *.pyc
 lib/python*
 __pycache__/
+*/bin/*
