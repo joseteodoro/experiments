@@ -5,4 +5,4 @@ __pycache__/
 .metadata
 .recommenders
 *.class
-bin/
+*/bin/*
