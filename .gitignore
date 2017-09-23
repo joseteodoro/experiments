@@ -2,3 +2,7 @@ node_modules/
 *.pyc
 lib/python*
 __pycache__/
+.metadata
+.recommenders
+*.class
+bin/
